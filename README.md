@@ -1,4 +1,4 @@
-![Wuxt logo](_assets/wuxt.png?raw=true "Wuxt")
+![Wuxt logo](_assets/wuxt.png?raw=true 'Wuxt')
 
 # Nuxt/WordPress development environment - Wuxt
 
@@ -7,11 +7,11 @@ the most awesome front-end application framework yet.
 
 - [Quick start](#quick)
 - [Introduction](#intro)
-- [Architecture](#env)  
+- [Architecture](#env)
 - [Getting started](#start)
   - [Custom container configuration](#start-custom)
   - [Setup WordPress](#setup-wp)
-  - [Setup Nuxt.js](#setup-nuxt)  
+  - [Setup Nuxt.js](#setup-nuxt)
 - [Generate and Deploy](#deploy)
 - [WordPress Rest API endpoints](#ep)
   - [Extensions to the API endpoints](#epp)
@@ -30,6 +30,7 @@ the most awesome front-end application framework yet.
 - [Credits](#cred)
 
 ## Quick start
+
 <a name="quick"/>
 
     git clone https://github.com/northosts/wuxt.git
@@ -37,26 +38,27 @@ the most awesome front-end application framework yet.
     docker-compose up -d
 
 - [http://localhost:3080/install.php](http://localhost:3080/install.php) - Install WordPress
-- [http://localhost:3080/wp-admin/options-permalink.php](http://localhost:3080/wp-admin/options-permalink.php) - Set permalinks to *Post name*
+- [http://localhost:3080/wp-admin/options-permalink.php](http://localhost:3080/wp-admin/options-permalink.php) - Set permalinks to _Post name_
 - [http://localhost:3080/wp-admin/themes.php](http://localhost:3080/wp-admin/themes.php) - Activate **wuxt**-theme
 - [http://localhost:3000](http://localhost:3000) - Done
 
 ## Introduction
+
 <a name="intro"/>
 
 The goal of Wuxt is to provide a ready to use development environment, which makes the
 full power of **_WordPress_** easily available to your front-end app. Included
 in Wuxt are:
 
--   Fully dockerized **_WordPress_** and **_nuxt.js_** container configuration,
-    `docker-compose up -d` sets up everything needed in one command and you can
-    start working
+- Fully dockerized **_WordPress_** and **_nuxt.js_** container configuration,
+  `docker-compose up -d` sets up everything needed in one command and you can
+  start working
 
--   Extended Rest API to give the front-end easy access to meta-fields,
-    featured media menus or the front-page configuration.
+- Extended Rest API to give the front-end easy access to meta-fields,
+  featured media menus or the front-page configuration.
 
--   The newest **_nuxt.js_** version, extended with a WordPress `$wp` object, to
-    connect to the extended **_WordPress_** Rest API.
+- The newest **_nuxt.js_** version, extended with a WordPress `$wp` object, to
+  connect to the extended **_WordPress_** Rest API.
 
 All together the **Wuxt** features get you started with your front-end with just
 one command, you just need to work with the intuitive WordPress admin interface
@@ -64,11 +66,13 @@ and can skip all back-end coding. But if you know your way around
 **_WordPress_** you are able to easily extend the back-end as well.
 
 ## The WUXT architecture
+
 <a name="env"/>
 
-![WUXT environment](_assets/wuxt-env.png?raw=true "WUXT environment")
+![WUXT environment](_assets/wuxt-env.png?raw=true 'WUXT environment')
 
 ## Getting started
+
 <a name="start"/>
 
 First clone this repository to a directory you want, then change to that
@@ -79,26 +83,27 @@ directory and simply start your containers (you need to have a running
 
 That starts the following containers:
 
--   **_MySql_** (`mysql.wuxt`) Database for your **_WordPress_** installation. The data-folder
-    of the database-container is mirrored to the \_db-folder of your host system, to
-    keep the data persistent.
+- **_MySql_** (`mysql.wuxt`) Database for your **_WordPress_** installation. The data-folder
+  of the database-container is mirrored to the \_db-folder of your host system, to
+  keep the data persistent.
 
--   **_WordPress_** (`wp.wuxt`) on a **_Apache_** server with the newest **_PHP_** version and
-    the **Wuxt** Rest API extension theme, **_ACF_** and other good-to-have plugins
-    pre-installed. The wp-content directory of the **_WordPress_** directory is
-    mirrored to the wp-content directory on your host.
+- **_WordPress_** (`wp.wuxt`) on a **_Apache_** server with the newest **_PHP_** version and
+  the **Wuxt** Rest API extension theme, **_ACF_** and other good-to-have plugins
+  pre-installed. The wp-content directory of the **_WordPress_** directory is
+  mirrored to the wp-content directory on your host.
 
--   **_nuxt.js_** (`front.wuxt`) started in development mode with file-monitoring and
-    browser-sync and extended by a complete **_WordPress_** Rest API wrapper and a
-    starter application, mimicing base functions of a **_WordPress_** theme.
+- **_nuxt.js_** (`front.wuxt`) started in development mode with file-monitoring and
+  browser-sync and extended by a complete **_WordPress_** Rest API wrapper and a
+  starter application, mimicing base functions of a **_WordPress_** theme.
 
 Your containers are available at
 
--   front-end: `http://localhost:3000`
--   back-end: `http://localhost:3080`, `http://localhost:3080/wp-admin`
--   database: `docker exec -ti mysql.wuxt bash`
+- front-end: `http://localhost:3000`
+- back-end: `http://localhost:3080`, `http://localhost:3080/wp-admin`
+- database: `docker exec -ti mysql.wuxt bash`
 
 ### Starting with custom container configuration
+
 <a name="start-custom"/>
 
 **wuxt** allows you to change the above setup to run multiple projects at the
@@ -137,12 +142,13 @@ After running the script start the new containers
     docker-compose up -d
 
 ### Setup **_WordPress_**
+
 <a name="setup-wp"/>
 
 In short:
 
 - Install WordPress (`http://localhost:3080/install.php`)
-- Set permalinks to *Post name* (`http://localhost:3080/wp-admin/options-permalink.php`)
+- Set permalinks to _Post name_ (`http://localhost:3080/wp-admin/options-permalink.php`)
 - Activate **wuxt**-theme (`http://localhost:3080/wp-admin/themes.php`)
 
 Do a common **_WordPress_** installation at
@@ -159,6 +165,7 @@ Then check that the Rest API at `http://localhost:3080/wp-json` is returning
 a JSON-object you are good to go.
 
 ### Setup **_nuxt.js_**
+
 <a name="setup-nuxt"/>
 
 Nuxt should have been started automatically inside the docker container. The
@@ -170,6 +177,7 @@ Check if **_BrowserSync_** is running, by doing a minor change to the
 front-page. The change should directly be visible on the front-page without manually reloading the page.
 
 ## Generate and Deploy
+
 <a name="deploy"/>
 
 To make a complete deploy of WUXT, you have to get at least one server and solve
@@ -178,7 +186,7 @@ running (we are working on a manual for some of the big cloud services).
 
 However, there is an easier solution, at least without on-site user generated
 content, like **_WordPress_**-comments (**_disqus_** would be ok, though). We
-have tweaked the **_nuxt.js_** *generate*-command, so that you can generate a
+have tweaked the **_nuxt.js_** _generate_-command, so that you can generate a
 fully static site with all your content, posts and pages inside the `dist`
 directory of **_nuxt_**. Then it's only a matter of getting the static html-site
 uploaded to a webspace of your choice.
@@ -189,7 +197,7 @@ First be sure your containers are running
 
     docker-compose up -d
 
-Then go to the wuxt root-directory and run *generate* with yarn
+Then go to the wuxt root-directory and run _generate_ with yarn
 
     yarn generate
 
@@ -213,7 +221,7 @@ To shut down the local web-server you have to run the following command insie th
 
 ### How it works
 
-The *generate*-command simply scrapes all available urls you added to your
+The _generate_-command simply scrapes all available urls you added to your
 **_nuxt.js_** and **_WordPress_** installation, saves the html-output and caches
 the JSON-requests to the **_WordPress_** Rest API.
 
@@ -228,8 +236,8 @@ help of the `static` plugin used on **_nuxt.org_**, which is jsut taking care
 of the payload caching. Read more [here](https://github.com/nuxt/rfcs/issues/22)
 and [here](https://github.com/nuxt/nuxtjs.org/tree/master/modules/static).
 
-
 ## WordPress Rest API endpoints
+
 <a name="ep"/>
 
 The **_WordPress_** Rest API gives you access to a wide range of native
@@ -238,11 +246,13 @@ endpoints from **_nuxt.js_** you can use the `$wp` extension, which integrates
 the [node-wpapi](https://www.npmjs.com/package/node-wp) library. You can find the full documentation [here](https://github.com/WP-API/node-wpapi).
 
 ### Extensions to the API endpoints
+
 <a name="epp"/>
 
 To make **wuxt** even more easy to use, there are a bunch of endpoint extensions to the **_WordPress_** Rest API.
 
 #### Front-page
+
 <a name="epp-front"/>
 
 ```
@@ -270,6 +280,7 @@ Note that the `_embed` parameter works for the front-page query, which gives you
 access to featured media (post-thumbnails), author information and more.
 
 #### Menus
+
 <a name="epp-menu"/>
 
 ```
@@ -296,6 +307,7 @@ If you want to use multiple menus, you can request them by providing the menu
 location to the endpoint.
 
 #### Slugs
+
 <a name="epp-slugs"/>
 
 ```
@@ -319,6 +331,7 @@ with the given slug and then for a page. The `embed` parameter is working for
 the `slug` endpoint.
 
 #### Meta fields
+
 <a name="epp-meta"/>
 
 The **_WordPress_** Rest API does not include meta fields in the post objects by
@@ -327,6 +340,7 @@ have automatically added the values of these fields. They are located in the
 `meta` section of the response objects.
 
 #### Taxonomy queries
+
 <a name="epp-tax"/>
 
 Taxonomy queries are limited of the simple WordPress Rest API url structure.
@@ -338,8 +352,8 @@ parameter to the WordPress API:
 GET: /wp-json/wp/v2/posts/?categories=1,2&and=true
 ```
 
-***Note:*** *Setting the relation to "and" will cause all taxonomy queries to
-use it. Right now you cant query one taxonomy with "and" and another with "or".*
+**_Note:_** _Setting the relation to "and" will cause all taxonomy queries to
+use it. Right now you cant query one taxonomy with "and" and another with "or"._
 
 In Nuxt you just have to use the "and" param after a post query for categories.
 
@@ -348,6 +362,7 @@ $wp.posts().categories([1,2]).param('and', true)
 ```
 
 #### Geo Queries
+
 <a name="epp-geo"/>
 
 If your application has to get posts by geographical proximity, you can use the geo parameters.
@@ -360,12 +375,12 @@ The coordinates parameter has to contain lat and lng, comma-separated and each v
      GET /wp-json/wp/v2/posts/?coordinates=lat_mkey:52.585,lng_mkey:13.373&distance=10
      GET /wp-json/wp/v2/posts/?coordinates=52.585,13.373&distance=10m
 
-
 #### Custom post types
+
 <a name="epp-cpt"/>
 
-The ***WordPress*** Rest API is providing endpoints for custom post types, as
-long as they are registered the right way (see the *Scaffolding* section for generating cpt-definitions).
+The **_WordPress_** Rest API is providing endpoints for custom post types, as
+long as they are registered the right way (see the _Scaffolding_ section for generating cpt-definitions).
 
 To make querying of your custom post types as easy as everything else, we added the `cpt` method to the `$wp` object. See post type queries for a
 fictional 'Movies' post type, below
@@ -379,6 +394,7 @@ The `cpt` function returns cpt-objects similar to the `posts()` or `pages()`
 queries, meta fields are included.
 
 ## Scripts
+
 <a name="scripts"/>
 
 To help you with some of the common tasks in **wuxt**, we integrated a bunch of
@@ -388,11 +404,12 @@ are ready to run.
     npm install
 
 ### Working with the containers
+
 <a name="scripts-containers"/>
 
-Working with ***Docker*** is awesome, but has some drawbacks. One of them is
+Working with **_Docker_** is awesome, but has some drawbacks. One of them is
 that you have to make some changes from inside the container. To
-enter the **WUXT** containers, you can use the following ***npm***
+enter the **WUXT** containers, you can use the following **_npm_**
 scripts:
 
     npm run enter:mysql
@@ -402,33 +419,35 @@ scripts:
 You exit a container with `exit`.
 
 #### WP-CLI and yarn
+
 <a name="scripts-containers-tools"/>
 
 Two of the most
-common tasks are managing ***WordPress*** and installing new packages
+common tasks are managing **_WordPress_** and installing new packages
 in the front-end.
 
 **WUXT** provides you with the full power of the
-***WP-CLI*** tool. Check out all documentation at [https://developer.wordpress.org/cli/commands/](https://developer.wordpress.org/cli/commands/). To run any ***WP-CLI*** command inside the `wp.wuxt`
-container, just use the following ***npm***-script:
+**_WP-CLI_** tool. Check out all documentation at [https://developer.wordpress.org/cli/commands/](https://developer.wordpress.org/cli/commands/). To run any **_WP-CLI_** command inside the `wp.wuxt`
+container, just use the following **_npm_**-script:
 
     npm run wp <wp-cli-command>
 
 Examples: `npm run wp plugin list`, `npm run wp plugin install advanced-custom-fields`, `npm run wp user create wuxt me@wuxt.io`
 
-The same concept we use for ***yarn*** in the front container:
+The same concept we use for **_yarn_** in the front container:
 
     npm run yarn <yarn-command>
 
 Example: `npm run yarn add nuxt-webfontloader`
 
 The commands are checking if the containers are running and installing needed
-dependencies automatically. So if ***WP-CLI*** is not installed in the container it will be installed before running a `wp` command.
+dependencies automatically. So if **_WP-CLI_** is not installed in the container it will be installed before running a `wp` command.
 
 ### Scaffolding
+
 <a name="scripts-scaffolding"/>
 
-**WUXT** allows you to generate custom post types and taxonomies via ***npm***
+**WUXT** allows you to generate custom post types and taxonomies via **_npm_**
 scripts. You can pass needed parameters as arguments. If you don't pass
 arguments, you will get prompted.
 
@@ -457,6 +476,7 @@ The taxonomy definition is copied into the `taxonomies` folder of the wuxt
 theme and loaded automatically by the theme.
 
 ## Links
+
 <a name="links"/>
 
 [WUXT Headless WordPress API Extensions](https://wordpress.org/plugins/wuxt-headless-wp-api-extensions/): Plugin which includes all our API extensions.
@@ -464,6 +484,7 @@ theme and loaded automatically by the theme.
 [Nuxt + WordPress = WUXT](https://www.danielauener.com/nuxt-js-wordpress-wuxt/): Introduction post for WUXT.
 
 ## Credits
+
 <a name="cred"/>
 
 [@yashha](https://github.com/yashha/wp-nuxt/commits?author=yashha) for the excelent idea with the `$wp` object, first implemented in [https://github.com/yashha/wp-nuxt](https://github.com/yashha/wp-nuxt)

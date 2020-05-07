@@ -4,8 +4,10 @@
       <Logo/>
 
       <nav class="header__nav">
+        <nuxt-link to="/">Home</nuxt-link>
         <nuxt-link to="/hello-world">Hello World</nuxt-link>
         <nuxt-link to="/sample-page">Sample Page</nuxt-link>
+        <nuxt-link to="/test-page">Test Page</nuxt-link>
       </nav>
     </header>
     <nuxt class="container"/>

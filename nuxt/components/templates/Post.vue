@@ -7,6 +7,19 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: this.post.title.rendered,
+      meta: [
+        {
+          hid: 'description',
+          id: 'description',
+          name: 'description',
+          content: this.post._yoast_wpseo_metadesc
+        }
+      ]
+    }
+  },
   props: {
     post: {
       type: Object,

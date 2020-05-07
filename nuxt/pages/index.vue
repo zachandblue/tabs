@@ -1,5 +1,24 @@
 <template>
   <main class="wp__content">
+    <h2>Hey Collin, I've listed the posts right here</h2>
+    <p>These come from the 'posts' array in the vuex store</p>
+    <ul>
+      <li v-for="post in posts" :key="post.id">
+        <nuxt-link :to="`/${post.slug}`">{{post.title.rendered}}</nuxt-link>
+      </li>
+    </ul>
+
+    <h2>Hey Collin, I've listed the custom posts, "CPTS", right here</h2>
+    <p>These also come from the vuex store</p>
+    <ul>
+      <li v-for="post in cpts" :key="post.id">
+        <nuxt-link :to="`/${post.slug}`">{{post.title.rendered}}</nuxt-link>
+      </li>
+    </ul>
+
+    <h2>Here is an ACF Example field</h2>
+    <p>{{exampleACF}}</p>
+
     <p>
       <span class="bold">Wuxt</span> combines
       <span class="bold italic">WordPress</span>, the worlds biggest CMS with
@@ -33,6 +52,65 @@
 </template>
 
 <script>
+import axios from 'axios'
+
+export default {
+  async asyncData(context) {
+    const { route, app, error } = context
+
+    try {
+      const frontPage = await app.$wp.frontPage()
+
+      return { frontPage }
+    } catch (e) {
+      error(e)
+    }
+  },
+  data() {
+    return {
+      site: null
+    }
+  },
+  head() {
+    return {
+      title: this.site ? this.site.name : this.frontPage.title.rendered,
+      meta: [
+        {
+          // pretty sure these get overwritten in nuxt.confic.js for the home page
+          hid: 'description',
+          id: 'description',
+          name: 'description',
+          content: this.frontPage._yoast_wpseo_metadesc
+        }
+      ]
+    }
+  },
+  beforeMount() {
+    this.test()
+  },
+  methods: {
+    async test() {
+      const site = await axios.get('http://' + process.env.baseUrl + '/wp-json')
+      this.$set(this, 'site', site.data)
+    }
+  },
+
+  computed: {
+    posts() {
+      return this.$store.state.posts
+    },
+    cpts() {
+      return this.$store.state.cpts
+    },
+    exampleACF() {
+      let field = ''
+      try {
+        field = this.frontPage.meta.example_field[0]
+      } catch (err) {}
+      return field
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
