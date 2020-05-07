@@ -1,10 +1,10 @@
-version: '2.1'
+version: "2.1"
 services:
   mysql.wuxt:
     container_name: ${WUXT_MYSQL_CONTAINER:-mysql.wuxt}
     image: mysql:5.7
     ports:
-      - '3306:3306'
+      - "4306:3306"
     volumes:
       - ./_db:/var/lib/mysql
     environment:
@@ -14,13 +14,13 @@ services:
 
   wp.wuxt:
     container_name: ${WUXT_WP_CONTAINER:-wp.wuxt}
-    image: wordpress:5.2.2-php7.2-apache
+    image: wordpress:php7.4-apache
     volumes:
       - ./wp-content:/var/www/html/wp-content:rw,cached
     expose:
-      - '${WUXT_PORT_BACKEND:-3080}'
+      - "${WUXT_PORT_BACKEND:-3080}"
     ports:
-      - '${WUXT_PORT_BACKEND:-3080}:80'
+      - "${WUXT_PORT_BACKEND:-3080}:80"
     environment:
       WORDPRESS_DB_HOST: ${WUXT_MYSQL_CONTAINER:-mysql.wuxt}:3306
       WORDPRESS_DB_NAME: wuxt
@@ -36,13 +36,13 @@ services:
   front.wuxt:
     container_name: ${WUXT_NUXT_CONTAINER:-front.wuxt}
     image: node:11-slim
-    working_dir: '/var/www/app'
+    working_dir: "/var/www/app"
     environment:
       - HOST=0.0.0.0
       - WUXT_WP_CONTAINER=${WUXT_WP_CONTAINER:-wp.wuxt}
       - WUXT_PORT_BACKEND=${WUXT_PORT_BACKEND:-3080}
     ports:
-      - '${WUXT_PORT_FRONTEND-3000}:3000'
+      - "${WUXT_PORT_FRONTEND-3000}:3000"
     volumes:
       - ./nuxt:/var/www/app
     command: bash -c "yarn install && WUXT_PORT_BACKEND=${WUXT_PORT_BACKEND:-3080} yarn dev"
